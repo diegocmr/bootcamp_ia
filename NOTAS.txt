@@ -1,0 +1,10 @@
+PROBLEMA 1
+	- segmentação é fundamental
+
+PROBLEMA 2
+	- modelo de clusterização de pessoas rodando
+
+
+PROBLEMA 3
+	- IDEIA
+	- https://www.cloudbooklet.com/fine-tuning-a-chatgpt-model-the-ultimate-guide-to-optimizing-your-conversational-ai/
