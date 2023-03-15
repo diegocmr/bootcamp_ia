@@ -8,7 +8,7 @@ services:
     ports: 
       - 8888:8888
     volumes:
-      - C:\git\bootcamp_ia\infra\api\app:/app
+      - .\api\app:/app
 
   bancodados:
     image: mysql:8
