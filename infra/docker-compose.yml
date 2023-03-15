@@ -1,0 +1,27 @@
+version: "3.9"
+services: 
+  api:
+    image: xxbielxd/api_server:1.1
+    container_name: api
+    networks:
+      - compose-bridge
+    ports: 
+      - 8888:8888
+    volumes:
+      - C:\git\bootcamp_ia\infra\api\app:/app
+
+  bancodados:
+    image: mysql:8
+    container_name: bancodados
+    networks:
+      - compose-bridge
+    ports: 
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+networks:
+  compose-bridge:
+    driver: bridge
+
