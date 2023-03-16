@@ -11,8 +11,10 @@ services:
     volumes:
       - .\api\app:/app
       - ..\bootcamp-solicitacoescredito.csv:/data/dadosclientes.csv
-    command: sh -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
-
+    command: sh -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/importar_dados.py && python /app/app.py"     
+    depends_on:
+      - bancodados
+     
   bancodados:
     image: mysql:8
     container_name: bancodados
