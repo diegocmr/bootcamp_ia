@@ -22,6 +22,8 @@ class Connection:
             CatchError(e)
     def fetchone (self):
         return self.mycursor.fetchone()
+    def fetchall (self):
+        return self.mycursor.fetchall()
     def rowcount (self):
         return self.mycursor.rowcount
     def commit (self):

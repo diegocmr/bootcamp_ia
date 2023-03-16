@@ -2,15 +2,18 @@ from model.Connection import Connection
 import secrets
 import sys
 import datetime
+
+userSession = False
+
 class Login:
     def __init__(self) -> None:
         return None;
     def efetuarLogin(self,login,senha) -> bool:
         cnx = Connection()
-        print((login,senha), file=sys.stderr)
+        #print((login,senha), file=sys.stderr)
         cnx.execute("SELECT id FROM Cliente where cnpj = %s AND senha = %s",(login,senha))
         user = cnx.fetchone()
-        print(user)
+       
         if(user):
             self.criarSessao(user[0])
 
@@ -30,3 +33,24 @@ class Login:
             return False 
     def getToken(self):
         return self.token
+    def efetuarLoginToken(self,token): 
+        global userSession
+        print(token, file=sys.stderr)
+        if not token:
+            raise Exception("O token informado está inválido")
+        cnx = Connection()
+        sql = """
+            SELECT 
+                External_Token.id_cliente
+            FROM External_Token                
+            WHERE
+                External_Token.token = %s
+        """
+
+        cnx.execute(sql,(token))
+        user = cnx.fetchone()
+        if (user):
+            userSession = user[0]
+        else:
+            raise Exception("O token informado está inválido")
+    
