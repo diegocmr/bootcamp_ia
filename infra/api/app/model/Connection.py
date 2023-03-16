@@ -1,5 +1,5 @@
 import mysql.connector
-from CatchError import CatchError
+from model.CatchError import CatchError
 from mysql.connector import Error
 class Connection:
     def __init__(self,database="bancodados",autocommit=False):
@@ -20,8 +20,12 @@ class Connection:
             return self.mycursor
         except Error as e:
             CatchError(e)
+    def fetchone (self):
+        return self.mycursor.fetchone()
+    def rowcount (self):
+        return self.mycursor.rowcount
     def commit (self):
         try:
-            self.cnx.commit()
+            return self.cnx.commit()
         except Error as e:
             CatchError(e)    
