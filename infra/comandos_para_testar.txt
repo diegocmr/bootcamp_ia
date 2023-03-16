@@ -1,5 +1,5 @@
 
-docker run -it -p 8888:8888 --mount type=bind,source=C:\git\bootcamp_ia\infra\api\app,target=/app xxbielxd/api_server:1.1
+docker run -it -p 8080:8080 --mount type=bind,source=C:\git\bootcamp_ia\infra\api\app,target=/app xxbielxd/api_server:1.1
 
 # Esse comando irá gerar a imagem da api
 docker build -t xxbielxd/api_server:1.1 .

@@ -1,14 +1,17 @@
 version: "3.9"
 services: 
   api:
-    image: xxbielxd/api_server:1.1
+    image: python:3
     container_name: api
     networks:
       - compose-bridge
     ports: 
-      - 8888:8888
+      - 8080:8080
+    restart: always
     volumes:
       - .\api\app:/app
+      - ..\bootcamp-solicitacoescredito.csv:/data/dadosclientes.csv
+    command: sh -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/app.py"
 
   bancodados:
     image: mysql:8
@@ -20,6 +23,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - .\banco_dados\script.sql:/docker-entrypoint-initdb.d/1.sql
 
 networks:
   compose-bridge:
