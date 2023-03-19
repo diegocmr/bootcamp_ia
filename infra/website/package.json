@@ -1,0 +1,15 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Essa é aplicação do nosso modelo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Victor da Silva",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.4",
+    "mdb-ui-kit": "^6.2.0"
+  }
+}

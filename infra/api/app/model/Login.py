@@ -3,8 +3,6 @@ import secrets
 import sys
 import datetime
 
-userSession = False
-
 class Login:
     def __init__(self) -> None:
         return None;
@@ -13,9 +11,9 @@ class Login:
         #print((login,senha), file=sys.stderr)
         cnx.execute("SELECT id FROM Cliente where cnpj = %s AND senha = %s",(login,senha))
         user = cnx.fetchone()
-       
+        
         if(user):
-            self.criarSessao(user[0])
+            self.criarSessao(user['id'])
 
         return  True if user else False
     def criarSessao(self,id_cliente):
@@ -35,7 +33,7 @@ class Login:
         return self.token
     def efetuarLoginToken(self,token): 
         global userSession
-        print(token, file=sys.stderr)
+        
         if not token:
             raise Exception("O token informado está inválido")
         cnx = Connection()
@@ -47,10 +45,15 @@ class Login:
                 External_Token.token = %s
         """
 
-        cnx.execute(sql,(token))
+        cnx.execute(sql,[token])
         user = cnx.fetchone()
+     
         if (user):
-            userSession = user[0]
+            self.userSession = user['id_cliente']
+            return self
         else:
             raise Exception("O token informado está inválido")
-    
+    def getUserSession(self):
+        cnx = Connection()
+        cnx.execute("SELECT * FROM Cliente where id = %s",[self.userSession])     
+        return cnx.fetchone()

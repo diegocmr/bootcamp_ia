@@ -14,7 +14,21 @@ services:
     command: sh -c "pip install --no-cache-dir -r /app/requirements.txt && python /app/importar_dados.py && python /app/app.py"     
     depends_on:
       - bancodados
-     
+  
+  website:
+    image: httpd:2.4
+    container_name: website
+    networks:
+      - compose-bridge
+    ports: 
+      - 8081:80
+    restart: always
+    volumes:
+      - .\website:/usr/local/apache2/htdocs/     
+    depends_on:
+      - api
+  
+
   bancodados:
     image: mysql:8
     container_name: bancodados
