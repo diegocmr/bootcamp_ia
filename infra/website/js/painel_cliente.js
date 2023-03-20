@@ -1,29 +1,21 @@
 $(document).ready(function(){
+    includeHTML()
+    var funcSucess = function(data){
+        console.log(data)
+        var cliente = data.cliente;
+        $(".client_name").html(cliente.nomeFantasia);
+    }
+    var funcError = function(err){
+        defaultError (err)
+    }
 
-    $(".botao_login").click(function(){
-        var cnpj = $("#campo_cnpj").val();
-        var senha = $("#campo_senha").val();
+    post_api("resumo_cliente",{},funcSucess,funcError)
 
-        if(cnpj.length < 2 || senha.length < 2){
-            setMessage("Informe seu CNPJ e sua senha!",".container-error");
-            return false;
-        }
-
-        var funcSucess = function(data){            
-            if (data.status == 401) {               
-                setMessage("Senha ou CNPJ incorreto!",".container-error");              
-            }else{
-                setMessage("Sucesso! Vamos te redirecionar",".container-error",5000,"bg-success");                  
-            }                  
-        }
-        var funcError = function(err){
-            if (err.status == 401) {
-                setMessage("Senha ou CNPJ incorreto!",".container-error");              
-            }         
-        }
-
-        post_api("login",{"senha":senha,"login":cnpj},funcSucess,funcError)
-    });
+    $(".nav_list a").click(function(){
+        setTimeout(function(){
+            open_page();
+        },100)        
+    })
 
 });
 

@@ -28,9 +28,9 @@
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div><b>Alexandra Williams</b></div>
+        <div><b class="client_name"></b></div>
         <!-- Right elements -->
-        <div class="d-flex align-items-center">           
+        <div class="d-flex align-items-center">
 
             <!-- Notifications -->
             <div class="dropdown">
@@ -83,14 +83,15 @@
                     <span class="nav_logo-name">Wtec Suprimentos</span>
                 </a>
                 <div class="nav_list">
-                    <a href="#" class="nav_link active">
+                    <a href="#dashboard" class="nav_link active">
                         <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Dashboard</span>
                     </a>
-                    <a href="#" class="nav_link">
-                        <i class='bx bx-user nav_icon'></i>
-                        <span class="nav_name">Users</span>
+                    <a href="#financeiro" class="nav_link">
+                        <i class='bx bx-dollar nav_icon'></i>
+                        <span class="nav_name">Financeiro</span>
                     </a>
+                    <!--
                     <a href="#" class="nav_link">
                         <i class='bx bx-message-square-detail nav_icon'></i>
                         <span class="nav_name">Messages</span>
@@ -107,6 +108,7 @@
                         <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                         <span class="nav_name">Stats</span>
                     </a>
+                    -->
                 </div>
             </div>
             <a href="#" class="nav_link">
@@ -115,14 +117,27 @@
             </a>
         </nav>
     </div>
-    <!--Container Main start-->
-    <div class="conteudo-menu">
-        <h4> teste Main Components</h4>
-    </div>
-    <!--Container Main end-->
+
+    <main style="margin-top: 58px">
+        <div id="dashboard" class="dashboard-page page_container" include-html="pages/dashboard.html" include-js="js/dashboard.js"></div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
     <!-- Navbar -->
     <script type="text/javascript" src="node_modules/mdb-ui-kit/js/mdb.min.js"></script>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/painel_cliente.js"></script>
     <script type="text/javascript" src="js/componentes.js"></script>
 </body>

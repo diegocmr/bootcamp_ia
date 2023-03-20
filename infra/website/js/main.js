@@ -12,14 +12,12 @@ $(document).ready(function(){
         }
 
         var funcSucess = function(data){            
-            if (data.status == 401) {               
-                setMessage("Senha ou CNPJ incorreto!",".container-error");              
-            }else{
-                setMessage("Sucesso! Vamos te redirecionar",".container-error",5000,"bg-success");         
-                setTimeout(function(){
-                    window.location.href = "/painel_cliente.html";
-                },1000)         
-            }                  
+           
+            setMessage("Sucesso! Vamos te redirecionar",".container-error",5000,"bg-success");         
+            setTimeout(function(){
+                window.location.href = "/painel_cliente.html";
+            },1000)         
+                            
         }
         var funcError = function(err){
             if (err.status == 401) {
