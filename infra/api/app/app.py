@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify,make_response
 from flask_cors import CORS
 from model.Login import Login
+from model.Cliente import Cliente
 from flask.json import JSONEncoder
 from datetime import date
 import sys
@@ -29,7 +30,7 @@ def handle_exception(e):
     res = make_response(jsonify({   
         "error": True,         
         "message": str(e)           
-    }),401)
+    }),404)
     return res
     
 @app.route('/login', methods=['POST'])
@@ -50,6 +51,17 @@ def resumo_cliente():
     res = make_response(jsonify({"cliente":login.getUserSession()}), 200)
     
     return res    
+
+@app.route('/emprestimos', methods=['POST'])
+def emprestimos():
+    
+    login = Login().efetuarLoginToken(request.cookies.get('api_session'))
+    cliente = Cliente(login)
+    
+    res = make_response(jsonify({"emprestimos":cliente.getEmprestimos()}), 200)
+    
+    return res    
+
 
 if __name__ == '__main__':
     app.run(port=8080,debug=True,host='0.0.0.0')

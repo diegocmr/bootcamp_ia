@@ -5,7 +5,7 @@ import datetime
 
 class Login:
     def __init__(self) -> None:
-        return None;
+        return None
     def efetuarLogin(self,login,senha) -> bool:
         cnx = Connection()
         #print((login,senha), file=sys.stderr)

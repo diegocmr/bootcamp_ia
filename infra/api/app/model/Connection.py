@@ -24,6 +24,8 @@ class Connection:
             CatchError(e)
     def fetchone (self):
         return CursorByName(self.mycursor).__next__()
+    def fetch (self):
+        return CursorByName(self.mycursor)
     def fetchall (self):
         return self.mycursor.fetchall()
     def rowcount (self):
