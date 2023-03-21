@@ -83,7 +83,7 @@ for index, row in dataFrame.iterrows():
             row.cnpjSemTraco,
             row.razaoSocial,
             row.nomeFantasia,
-            row.razaoSocial,
+            row.capitalSocial,
             row.empresa_MeEppMei,
             row.primeiraCompra,
             row.totalAtivo,
