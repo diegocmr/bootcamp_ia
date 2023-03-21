@@ -1,6 +1,6 @@
 PTBR = {
     "emptyTable": "Nenhum registro encontrado",
-    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+    "info": "De _START_ até _END_ de _TOTAL_ registros",
     "infoFiltered": "(Filtrados de _MAX_ registros)",
     "infoThousands": ".",
     "loadingRecords": "Carregando...",

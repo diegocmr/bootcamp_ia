@@ -10,8 +10,7 @@ class Login:
         cnx = Connection()
         #print((login,senha), file=sys.stderr)
         cnx.execute("SELECT id FROM Cliente where cnpj = %s AND senha = %s",(login,senha))
-        user = cnx.fetchone()
-        
+        user = cnx.fetchone()       
         if(user):
             self.criarSessao(user['id'])
 

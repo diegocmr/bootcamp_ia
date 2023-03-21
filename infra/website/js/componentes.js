@@ -82,8 +82,14 @@ function includeHTML(js = false) {
 }
 
 function open_page() {
+    if(window.location.hash == ''|| window.location.hash == null){
+        page = "#dashboard";
+    }else{
+        page = window.location.hash
+    }
+
     $(".page_container").hide();
-    $(window.location.hash).show();
+    $(page).show();
 }
 function formatDate(date) {
     var d = new Date(date),
