@@ -1,6 +1,7 @@
 import mysql.connector
 import pandas as pd
 import numpy as np
+import sys
 from mysql.connector import Error
 try:
     cnx = mysql.connector.connect(
@@ -11,6 +12,15 @@ try:
     )
 except Error as e:
     print("Error while connecting to MySQL", e)
+
+mycursor = cnx.cursor(prepared=True)
+mycursor.execute('SELECT count(*) FROM Cliente ')
+numDados = mycursor.fetchone()
+mycursor.close()
+
+if(numDados[0] > 0) :
+    print("Os dados já foram carregados")
+    sys.exit()
 
 dataFrame = pd.read_csv("/data/dadosclientes.csv")
 dataFrame = dataFrame.astype(object).replace(np.nan, None)

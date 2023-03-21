@@ -2,5 +2,7 @@
 import sys
 
 class CatchError:
-    def __init__(self,message):
-        raise Exception(message)
+
+    def __init__(self,e):       
+        
+        raise Exception(e.message)

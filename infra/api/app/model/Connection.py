@@ -2,7 +2,7 @@ import mysql.connector
 from model.CatchError import CatchError
 from mysql.connector import Error
 from model.CursorByName import CursorByName
-    
+import sys
 class Connection:
     def __init__(self,database="bancodados",autocommit=False):
         try:
@@ -22,9 +22,13 @@ class Connection:
             return self.mycursor
         except Error as e:
             CatchError(e)
-    def fetchone (self):
+    def fetchone (self):  
+        if (self.mycursor.rowcount == 0):
+            return False      
         return CursorByName(self.mycursor).__next__()
     def fetch (self):
+        if (self.mycursor.rowcount == 0):
+            return False 
         return CursorByName(self.mycursor)
     def fetchall (self):
         return self.mycursor.fetchall()

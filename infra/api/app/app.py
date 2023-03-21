@@ -4,6 +4,7 @@ from model.Login import Login
 from model.Cliente import Cliente
 from flask.json import JSONEncoder
 from datetime import date
+
 import sys
 
 class CustomJSONEncoder(JSONEncoder):
@@ -30,7 +31,8 @@ def handle_exception(e):
     res = make_response(jsonify({   
         "error": True,         
         "message": str(e)           
-    }),404)
+    }),(401 if str(e) == "O token informado está inválido" else 404))
+
     return res
     
 @app.route('/login', methods=['POST'])
@@ -58,7 +60,7 @@ def emprestimos():
     login = Login().efetuarLoginToken(request.cookies.get('api_session'))
     cliente = Cliente(login)
     
-    res = make_response(jsonify({"emprestimos":cliente.getEmprestimos()}), 200)
+    res = make_response(jsonify({"data":cliente.getEmprestimos()}), 200)
     
     return res    
 
