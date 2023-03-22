@@ -64,6 +64,15 @@ def emprestimos():
     
     return res    
 
+@app.route('/cadastro_cliente', methods=['POST'])
+def cadastro_cliente():
+      
+    cliente = Cliente(None)
+    json = request.get_json() 
+    res = make_response(jsonify({"status":cliente.cadastroCliente(json)}), 200)
+    
+    return res    
+
 
 if __name__ == '__main__':
     app.run(port=8080,debug=True,host='0.0.0.0')

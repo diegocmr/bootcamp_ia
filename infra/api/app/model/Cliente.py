@@ -17,3 +17,44 @@ class Cliente:
             if cont > 10:
                 break
         return emprestimos
+    def cadastroCliente(self,dados):
+        cnx = Connection()      
+        sql = """
+        
+        INSERT INTO Cliente (
+            cnpj,
+            razaoSocial,
+            nomeFantasia,
+            capitalSocial,
+            totalAtivo,
+            totalPatrimonioLiquido,
+            fataturamentoBruto,
+            senha,
+            empresa_MeEppMei
+        )
+        VALUES
+        (
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+        )
+        """
+        cnx.execute(sql,[
+            dados["cnpj"],
+            dados["razaoSocial"],
+            dados["nomeFantasia"],
+            dados["capitalSocial"],
+            dados["totalAtivo"],
+            dados["totalPatrimonioLiquido"],
+            dados["fataturamentoBruto"],
+            dados["senha"],
+            dados["empresa_MeEppMei"]
+        ])
+        
+        return cnx.rowcount()
