@@ -45,7 +45,15 @@ function defaultError(err) {
     }
 
 }
-
+function verificarNull(data,zero_validation= true){
+    return (typeof data == "undefined" || data == null  || data == NaN || data == "" || (zero_validation && data == 0 ))
+}
+function tratarInt(data){
+    return (data)? isNaN(parseInt(data)) ? 0: parseInt(data) : 0
+}
+function tratarFloat(data){
+    return (data)? isNaN(parseFloat(data)) ? 0: parseFloat(data) : 0
+}
 function includeHTML(js = false) {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */

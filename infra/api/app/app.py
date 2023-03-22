@@ -70,7 +70,9 @@ def cadastro_cliente():
     cliente = Cliente(None)
     json = request.get_json() 
     res = make_response(jsonify({"status":cliente.cadastroCliente(json)}), 200)
-    
+    login = Login()
+    login.efetuarLogin(json["cnpj"],json["senha"])
+    res.set_cookie("api_session", value=login.getToken(),samesite="None",domain="127.0.0.1",secure="False")  
     return res    
 
 
