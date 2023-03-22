@@ -28,7 +28,7 @@ class Cliente:
             capitalSocial,
             totalAtivo,
             totalPatrimonioLiquido,
-            fataturamentoBruto,
+            faturamentoBruto,
             senha,
             empresa_MeEppMei
         )
@@ -42,7 +42,7 @@ class Cliente:
             %s,
             %s,
             %s,
-            %s,
+            %s
         )
         """
         cnx.execute(sql,[
@@ -56,5 +56,5 @@ class Cliente:
             dados["senha"],
             dados["empresa_MeEppMei"]
         ])
-        
-        return cnx.rowcount()
+        cnx.commit()
+        return bool(cnx.rowcount())
