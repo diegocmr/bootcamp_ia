@@ -41,7 +41,7 @@ function setMessage(msg, obj, seconds = 10000, type = "bg-danger", text_color = 
 function defaultError(err) {
 
     if (err.status == 401) {
-        window.location.href = "/";
+        window.location.href = "/login.html";
     }
 
 }

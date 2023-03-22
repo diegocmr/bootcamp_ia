@@ -1,168 +1,479 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!--for scaling across various devices-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wtec Suprimentos</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!--set the color for the URL bar on Chrome on Android phones/tablets-->
-    <meta name="theme-color" content="#000000">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <title>Wtec Suprimentos</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-    <!--stylesheet-->
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
-    <link rel="stylesheet" href="node_modules/mdb-ui-kit/css/mdb.min.css" />
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
 
+  <!-- =======================================================
+  * Template Name: Impact
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
-<body class="h-100">
-    <div class="container h-100 d-inline-block h-100 d-flex align-items-center justify-content-center">
-        <div class="container-login border p-5">
+<body>
 
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@wtec.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+55 0000-0000</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
 
+  <header id="header" class="header d-flex align-items-center">
 
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Wtec Suprimentos<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#duvidas">Dúvidas</a></li>         
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="/login.html">Login/Cadastro</a></li>
+        </ul>
+      </nav><!-- .navbar -->
 
-
-            <!-- Pills navs -->
-            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                        aria-controls="pills-login" aria-selected="true">Login</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-                        aria-controls="pills-register" aria-selected="false">Registrar</a>
-                </li>
-            </ul>
-            <!-- Pills navs -->
-
-            <!-- Pills content -->
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                    <form>             
-                               
-                        <div class="form-outline mb-4 mt-3">
-                            <input type="email" id="campo_cnpj" class="form-control" />
-                            <label class="form-label" for="campo_cnpj">CNPJ</label>
-                        </div>
-                      
-                        <div class="form-outline mb-4">
-                            <input type="password" id="campo_senha" class="form-control" />
-                            <label class="form-label" for="campo_senha">Senha</label>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col d-flex justify-content-center">
-                                <!-- Checkbox -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                    <label class="form-check-label" for="form2Example31"> Me lembrar </label>
-                                </div>
-                            </div>
-        
-                            <div class="col">
-                                <!-- Simple link -->
-                                <a href="#!">Esqueceu sua senha?</a>
-                            </div>
-                        </div>
-
-                        <!-- Submit button -->
-                        <button type="button" class="botao_login btn btn-primary btn-block mb-4">Logar</button>
-               
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                                      
-                        <div class="form-outline mb-4">
-                            <input type="text" id="cnpj" class="form-control" />
-                            <label class="form-label" for="cnpj">CNPJ</label>
-                        </div>
-                     
-                        <div class="form-outline mb-4">
-                            <input type="text" id="razaoSocial" class="form-control" />
-                            <label class="form-label" for="razaoSocial">Razao social</label>
-                        </div>
-                        
-                        <div class="form-outline mb-4">
-                            <input type="text" id="nomeFantasia" class="form-control" />
-                            <label class="form-label" for="nomeFantasia">Nome Fantasia</label>
-                        </div>
-                       
-                        <div class="form-outline mb-4">
-                            <input type="text" id="capitalSocial" class="form-control" />
-                            <label class="form-label" for="capitalSocial">Capital Social</label>
-                        </div>
-                        
-                        <div class="form-outline mb-4">
-                            <input type="text" id="totalAtivo" class="form-control" />
-                            <label class="form-label" for="totalAtivo">Total Ativo</label>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="text" id="totalPatrimonioLiquido" class="form-control" />
-                            <label class="form-label" for="totalPatrimonioLiquido">Patrimonio Liquido</label>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="text" id="fataturamentoBruto" class="form-control" />
-                            <label class="form-label" for="fataturamentoBruto">Faturamento Bruto</label>
-                        </div>
-                                                                   
-                        <div class="form-outline mb-4">
-                            <input type="password" id="senha" class="form-control" />
-                            <label class="form-label" for="senha">Senha</label>
-                        </div>
-
-                        
-                        <div class="form-outline mb-4">
-                            <input type="password" id="senha_repetir" class="form-control" />
-                            <label class="form-label" for="senha_repetir">Repetir Senha</label>
-                        </div>
-
-                        <div class="form-check d-flex justify-content-right mb-4">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="empresa_MeEppMei" 
-                                aria-describedby="registerCheckHelpText" />
-                            <label class="form-check-label" for="empresa_MeEppMei">
-                                A empresa é MEI
-                            </label>
-                        </div>
-
-                        <!-- Checkbox -->
-                        <div class="form-check d-flex justify-content-right mb-4">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" 
-                                aria-describedby="registerCheckHelpText" />
-                            <label class="form-check-label" for="registerCheck">
-                                Eu li e concordo com os termos
-                            </label>
-                        </div>
-
-                        <!-- Submit button -->
-                        <button  class="btn btn-primary btn-block mb-3 botao_cadastro">Cadatrar</button>
-                    
-                </div>
-            </div>
-            <!-- Pills content -->
-           
-            <div class="container-error" style="display: none;">
-                <div class="message-error"></div>
-            </div>
-        </div>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
     </div>
-    <script type="text/javascript" src="node_modules/mdb-ui-kit/js/mdb.min.js"></script>
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/componentes.js"></script>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+    <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+          <h2>Bem vindo a <span> Wtec Suprimentos </span></h2>
+          <p>Somos uma empresa importadora de diversos suprimentos de informática, como cabos, cartuchos de impressoras, mouses, teclados, câmeras e etc.</p>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" class="btn-get-started">Começar</a>
+            <a href="https://www.youtube.com/watch?v=tyZD2S9fRMY&ab_channel=PotencialSuprimentos" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Ver vídeo</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
+        </div>
+      </div>
+    </div>
+
+    <div class="icon-boxes position-relative">
+      <div class="container position-relative">
+        <div class="row gy-4 mt-5">
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a href="#" class="stretched-link">Nossa história</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-gem"></i></div>
+              <h4 class="title"><a href="#" class="stretched-link">O que é importante</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-geo-alt"></i></div>
+              <h4 class="title"><a href="#" class="stretched-link">Onde Encontrar</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-command"></i></div>
+              <h4 class="title"><a href="#" class="stretched-link">Como conectar</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+  <!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Sobre nós</h2>
+          <p>Somos uma empresa importadora de diversos suprimentos de informática, como cabos, cartuchos de impressoras, mouses, teclados, câmeras e etc.
+            Nos localizamos em Rua Carlos Augusto Cornelsen , Bom Retiro, Curitiba 80520560.
+          </p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <h3>O Poder do Planejamento: Como Antecipar o Futuro e Alcançar Seus Objetivos</h3>
+            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
+            <p>A Wtec fornece suprimentos de TI de alta qualidade e também ajuda seus clientes financeiramente por meio de empréstimos. Além disso, a equipe trabalha em colaboração com os clientes para ajudá-los a desenvolver um planejamento financeiro sólido e alcançar seus objetivos a longo prazo. Isso inclui a análise cuidadosa das finanças do cliente, a identificação de oportunidades de investimento e a criação de estratégias para gerenciar melhor suas finanças. Com a ajuda da equipe especializada da empresa, os clientes podem acessar recursos valiosos para impulsionar seus negócios e garantir sua estabilidade financeira.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Juntos somos mais fortes.
+              </p>              
+              <p>
+                A Wtec é especializada em fornecer soluções de tecnologia para empresas de todos os tamanhos e segmentos. Além de oferecer produtos de qualidade, essa empresa trabalha em equipe com seus clientes para entender as necessidades específicas de cada um. Dessa forma, é possível fornecer soluções personalizadas que atendam às demandas individuais de cada negócio. A colaboração entre a empresa e os clientes é uma parte essencial do processo, já que permite que as duas partes trabalhem juntas para alcançar os objetivos em comum. Com a ajuda de uma equipe de profissionais altamente qualificados, essa empresa está comprometida em fornecer um serviço excepcional aos seus clientes, trabalhando em equipe para garantir a satisfação de todos.
+              </p>
+
+              <div class="position-relative mt-4">
+                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
+                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="zoom-out">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= Stats Counter Section ======= -->
+    <section id="stats-counter" class="stats-counter">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 align-items-center">
+
+          <div class="col-lg-6">
+            <img src="assets/img/stats-img.svg" alt="" class="img-fluid">
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Clientes felizes</strong>  </p>
+            </div><!-- End Stats Item -->
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Emprestimos</strong> bem colocados e planejados</p>
+            </div><!-- End Stats Item -->
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Horas de Suporte</strong> ao cliente, totalmente personalizado</p>
+            </div><!-- End Stats Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Stats Counter Section -->
+
+     
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="duvidas" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3>Frequentemente perguntado <strong>Perguntas</strong></h3>
+              <p>
+                Nossa empresa está sempre disponível para atender prontamente a qualquer dúvida dos nossos clientes. Para isso, oferecemos diversos canais de comunicação, como e-mail, telefone, chat online e redes sociais. </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <span class="num">1.</span>
+                    Somos uma empresa pequena, podemos ser cliente?
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Claro que sim! Acreditamos que todas as empresas, independente do tamanho, merecem acesso aos nossos produtos e serviços de qualidade. Nós valorizamos cada um de nossos clientes, desde as pequenas startups até as grandes corporações. Nosso objetivo é ajudar nossos clientes a alcançarem seus objetivos, independentemente do tamanho de seus negócios. Nossa equipe está à disposição para oferecer soluções personalizadas e atender às necessidades específicas de cada cliente, independentemente do tamanho da empresa. Ficaremos felizes em recebê-lo como nosso cliente e contribuir para o crescimento e sucesso de sua empresa.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <span class="num">2.</span>
+                    Acabei de fazer meu cadastro, quando vou poder comprar os produtos?
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Obrigado por se cadastrar em nossa plataforma! Geralmente, a aprovação do cadastro é feita em até 24 horas úteis após o preenchimento dos dados. Assim que seu cadastro for aprovado, você poderá realizar suas compras em nosso site. Caso seja necessário, nossa equipe entrará em contato para confirmar algumas informações adicionais. Fique atento(a) ao seu e-mail cadastrado para receber atualizações sobre o status do seu cadastro. Agradecemos a escolha de nossa empresa e estamos ansiosos para atendê-lo(a) e fornecer os melhores produtos e serviços para o seu negócio.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <span class="num">3.</span>
+                    Quando poderei fazer emprestimos com a empresa?
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Obrigado pelo seu interesse em fazer empréstimos conosco! Para que possamos avaliar sua solicitação de empréstimo, será necessário que você preencha um formulário com informações adicionais sobre sua empresa e sua situação financeira atual. Após o recebimento do formulário, nossa equipe fará uma análise cuidadosa e entrará em contato com você para discutir as opções de empréstimo disponíveis. O tempo de avaliação pode variar, dependendo da complexidade da sua solicitação e do volume de pedidos recebidos. No entanto, garantimos que faremos o possível para agilizar o processo e fornecer as melhores opções de empréstimo para atender às suas necessidades. Agradecemos novamente pela escolha de nossa empresa e esperamos ajudá-lo a alcançar seus objetivos financeiros
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <span class="num">4.</span>
+                    Quanto poderei pedir de emprestimo?
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Obrigado pelo seu interesse em fazer um empréstimo conosco! O valor máximo do empréstimo que podemos oferecer depende de vários fatores, como a sua situação financeira atual, histórico de crédito e outros detalhes específicos do seu negócio. Para que possamos avaliar o valor máximo que podemos oferecer a você, precisamos que preencha um formulário com informações detalhadas sobre a sua empresa e a finalidade do empréstimo. Nossa equipe de especialistas em finanças analisará cuidadosamente o seu formulário e entrará em contato com você para discutir as opções disponíveis. Garantimos que faremos o possível para encontrar a melhor solução de empréstimo para atender às suas necessidades financeiras. Ficaremos felizes em ajudar a impulsionar o seu negócio com nossos serviços financeiros.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <span class="num">5.</span>
+                    Poderei cancelar em qualquer momento meu contrato?
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    "Com certeza! Nós entendemos que as necessidades de nossos clientes podem mudar com o tempo e estamos aqui para ajudá-los da melhor forma possível. Caso você decida cancelar seu contrato conosco, basta nos informar por meio de um dos nossos canais de atendimento. Porém, é importante lembrar que o cancelamento do contrato pode estar sujeito a certas condições e cláusulas contratuais que precisarão ser avaliadas. Nossa equipe de atendimento ao cliente está sempre disponível para esclarecer quaisquer dúvidas e ajudá-lo(a) no processo de cancelamento. Nosso objetivo é garantir a satisfação total de nossos clientes e faremos o possível para atender às suas expectativas em todas as etapas do nosso relacionamento. Agradecemos novamente pela escolha de nossa empresa e esperamos ter uma longa e próspera parceria com você.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+       <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Contato</h2>
+          <p>Respeito, atenção, soluções personalizadas e transparência. São as regras que seguimos para garantir a satisfação dos nossos clientes.</p>
+        </div>
+
+        <div class="row gx-lg-0 gy-4">
+
+          <div class="col-lg-4">
+
+            <div class="info-container d-flex flex-column align-items-center justify-content-center">
+              <div class="info-item d-flex">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h4>Location:</h4>
+                  <p>Rua Carlos Augusto Cornelsen , Bom Retiro, Curitiba 80520560</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h4>Email:</h4>
+                  <p>info@wtec.com</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-phone flex-shrink-0"></i>
+                <div>
+                  <h4>Telefone:</h4>
+                  <p>+55 0000 0000</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-clock flex-shrink-0"></i>
+                <div>
+                  <h4>Aberto:</h4>
+                  <p>segunda-sexta: 11h - 18h </p>
+                </div>
+              </div><!-- End Info Item -->
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <form action="#" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Seu nome" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Seu Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Assunto" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="7" placeholder="Mensagem" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Carregando</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Sua mensagem está sendo enviado, Obrigado!</div>
+              </div>
+              <div class="text-center"><button type="submit">Enviar Mensagem</button></div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Wtec Suprimentos</span>
+          </a>
+          <p>Potencialize seu negócio com soluções de TI de excelência. Junte-se a nós agora.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>    
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Fale conosco</h4>
+          <p>
+            Rua Carlos Augusto Cornelsen <br>
+            Bom Retiro, Curitiba 80520560<br>
+            Brasil <br><br>
+            <strong>Telefone:</strong> +55 0000 00000<br>
+            <strong>Email:</strong> info@wtec.com<br>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Impact</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>

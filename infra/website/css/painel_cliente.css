@@ -2,13 +2,30 @@
 .conteudo-menu{
     margin-top: 70px;
 }
+:root {
+   
+}
+.btn:hover {
+    background: rgba(0, 131, 116, 0.8) !important;
+}
+.btn {
+    background: var(--first-color) !important;
+    border: 0;
+    padding: 14px 45px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+
 
 /* Menu */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 :root{
+    --color-default: #222222;    
+    --color-secondary: #f85a40;
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #0d0d0e;
+    --first-color: #008374;
     --first-color-light: #fefeff;
     --white-color: #F7F6FB;
     --body-font: 'Nunito', sans-serif;

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!--for scaling across various devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--set the color for the URL bar on Chrome on Android phones/tablets-->
+    <meta name="theme-color" content="#000000">
+
+    <title>Wtec Suprimentos</title>
+
+    <!--stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" href="node_modules/mdb-ui-kit/css/mdb.min.css" />
+
+</head>
+
+<body class="">
+    <div class="container mt-5 d-inline-block d-flex align-items-center justify-content-center">
+        
+        <div class="container-login border p-5">
+
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                        aria-controls="pills-login" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                        aria-controls="pills-register" aria-selected="false">Registrar</a>
+                </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <!-- Pills content -->
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                    <form>             
+                               
+                        <div class="form-outline mb-4 mt-3">
+                            <input type="email" id="campo_cnpj" class="form-control" />
+                            <label class="form-label" for="campo_cnpj">CNPJ</label>
+                        </div>
+                      
+                        <div class="form-outline mb-4">
+                            <input type="password" id="campo_senha" class="form-control" />
+                            <label class="form-label" for="campo_senha">Senha</label>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                                    <label class="form-check-label" for="form2Example31"> Me lembrar </label>
+                                </div>
+                            </div>
+        
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a href="#!">Esqueceu sua senha?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="button" class="botao_login btn btn-primary btn-block mb-4">Logar</button>
+               
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                                      
+                        <div class="form-outline mb-4">
+                            <input type="text" id="cnpj" class="form-control" />
+                            <label class="form-label" for="cnpj">CNPJ</label>
+                        </div>
+                     
+                        <div class="form-outline mb-4">
+                            <input type="text" id="razaoSocial" class="form-control" />
+                            <label class="form-label" for="razaoSocial">Razao social</label>
+                        </div>
+                        
+                        <div class="form-outline mb-4">
+                            <input type="text" id="nomeFantasia" class="form-control" />
+                            <label class="form-label" for="nomeFantasia">Nome Fantasia</label>
+                        </div>
+                       
+                        <div class="form-outline mb-4">
+                            <input type="text" id="capitalSocial" class="form-control" />
+                            <label class="form-label" for="capitalSocial">Capital Social</label>
+                        </div>
+                        
+                        <div class="form-outline mb-4">
+                            <input type="text" id="totalAtivo" class="form-control" />
+                            <label class="form-label" for="totalAtivo">Total Ativo</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="text" id="totalPatrimonioLiquido" class="form-control" />
+                            <label class="form-label" for="totalPatrimonioLiquido">Patrimonio Liquido</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="text" id="fataturamentoBruto" class="form-control" />
+                            <label class="form-label" for="fataturamentoBruto">Faturamento Bruto</label>
+                        </div>
+                                                                   
+                        <div class="form-outline mb-4">
+                            <input type="password" id="senha" class="form-control" />
+                            <label class="form-label" for="senha">Senha</label>
+                        </div>
+
+                        
+                        <div class="form-outline mb-4">
+                            <input type="password" id="senha_repetir" class="form-control" />
+                            <label class="form-label" for="senha_repetir">Repetir Senha</label>
+                        </div>
+
+                        <div class="form-check d-flex justify-content-right mb-4">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="empresa_MeEppMei" 
+                                aria-describedby="registerCheckHelpText" />
+                            <label class="form-check-label" for="empresa_MeEppMei">
+                                A empresa é MEI
+                            </label>
+                        </div>
+
+                        <!-- Checkbox -->
+                        <div class="form-check d-flex justify-content-right mb-4">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" 
+                                aria-describedby="registerCheckHelpText" />
+                            <label class="form-check-label" for="registerCheck">
+                                Eu li e concordo com os termos
+                            </label>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button  class="btn btn-primary btn-block mb-3 botao_cadastro">Cadatrar</button>
+                    
+                </div>
+            </div>
+            <!-- Pills content -->
+           
+            <div class="container-error" style="display: none;">
+                <div class="message-error"></div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="node_modules/mdb-ui-kit/js/mdb.min.js"></script>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/componentes.js"></script>
+</body>
+
+</html>
