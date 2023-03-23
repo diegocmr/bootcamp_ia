@@ -17,6 +17,16 @@
     border-radius: 50px;
 }
 
+.container-solicitar_emprestimo{
+    width:500px;
+}
+.container-botoes-financeiro{
+    max-width: 800px;
+    margin:0 auto !important;
+}
+.emprestimos_wrapper label{
+    color: #222222 !important;
+}
 
 /* Menu */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
@@ -130,10 +140,10 @@ a{
 .body-pd{
     padding-left: calc(var(--nav-width) + 1rem)
 }
-.active{
+.activeMenu{
     color: var(--white-color)
 }
-.active::before{
+.activeMenu::before{
     content: '';
     position: absolute;
     left: 0;

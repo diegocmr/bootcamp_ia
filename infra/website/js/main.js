@@ -1,6 +1,6 @@
 $(document).ready(function(){
     if(document.domain == "localhost"){
-        window.location.href = "http://127.0.0.1:8081/";
+        window.location.href = "http://127.0.0.1:8081/login.html";
     }
     $(".botao_login").click(function(){
         var cnpj = $("#campo_cnpj").val();

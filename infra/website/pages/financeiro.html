@@ -1,37 +1,59 @@
 <div class="container pt-4">
-    <div class="row">
 
-        <div class="col-md-6 pe-5 ps-5">
-            <div class="border pe-5 ps-5 pt-2">
-                <div class="text-center mb-3">
-                    <p><b>Solicitar Emprestimo</b></p>                    
-                </div>
-                <!-- Name input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="form4Example1" class="form-control border" />
-                    <label class="form-label" for="form4Example1">Valor</label>
-                </div>
-
-                <!-- Message input -->
-                <div class="form-outline mb-4">
-                    <textarea class="form-control border" id="form4Example3" rows="4"></textarea>
-                    <label class="form-label" for="form4Example3">Mensagem *Opcional*</label>
-                </div>
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form5Example3" checked />
-                    <label class="form-check-label" for="form5Example3">
-                        Eu li e concordo com os termos
-                    </label>
-                </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Enviar Solicitação</button>
+    <div class="container-login border p-5">
+        <ul class="nav nav-pills nav-justified mb-3 " id="ex1" role="tablist">
+            <div class="row container-botoes-financeiro " >
+                <li class="nav-item col-sm-6" role="presentation">
+                    <a class="nav-link active" id="tab-resumo" data-mdb-toggle="pill" href="#resumo-financeiro" role="tab"
+                        aria-controls="resumo-financeiro" aria-selected="true">Resumo</a>
+                </li>
+                <li class="nav-item col-sm-6" role="presentation">
+                    <a class="nav-link" id="tab-solicitar" data-mdb-toggle="pill" href="#solicitar-emprestimo-tab"
+                        role="tab" aria-controls="solicitar-emprestimo-tab" aria-selected="false">Solicitar</a>
+                </li>
             </div>
-        </div>
-        <div class="col-md-6">
-            <table id="emprestimos" class="display table " style="width:100%">
+        </ul>
+        <div class="tab-content">
 
-            </table>
+            <div class="col-sm-12 tab-pane fade show active" id="resumo-financeiro" role="tabpanel"
+                aria-labelledby="tab-resumo">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <table id="emprestimos" class="display table " style="width:100%">
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm-12 tab-pane fade" id="solicitar-emprestimo-tab" role="tabpanel"
+                aria-labelledby="tab-solicitar">
+                <div class="col-md-12 pe-5 ps-5 d-flex justify-content-center">
+                    <div class="border pe-5 ps-5 pt-2 container-solicitar_emprestimo">
+                        <div class="text-center mb-3">
+                            <p><b>Solicitar Emprestimo</b></p>
+                        </div>
+                        <!-- Name input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form4Example1" class="form-control border" />
+                            <label class="form-label" for="form4Example1">Valor</label>
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="form-outline mb-4">
+                            <textarea class="form-control border" id="form4Example3" rows="4"></textarea>
+                            <label class="form-label" for="form4Example3">Mensagem *Opcional*</label>
+                        </div>
+                        <!-- Checkbox -->
+                        <div class="form-check d-flex justify-content-center mb-4">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="form5Example3" checked />
+                            <label class="form-check-label" for="form5Example3">
+                                Eu li e concordo com os termos
+                            </label>
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Enviar Solicitação</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

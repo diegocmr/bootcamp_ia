@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    if(document.domain == "localhost"){
+        window.location.href = "http://127.0.0.1:8081/painel_cliente.html";
+    }
     includeHTML()
     var funcSucess = function(data){
         console.log(data)
@@ -49,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     function colorLink(){
     if(linkColor){
-    linkColor.forEach(l=> l.classList.remove('active'))
-    this.classList.add('active')
+    linkColor.forEach(l=> l.classList.remove('activeMenu'))
+    this.classList.add('activeMenu')
     }
     }
     linkColor.forEach(l=> l.addEventListener('click', colorLink))
