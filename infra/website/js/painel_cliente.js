@@ -20,6 +20,8 @@ $(document).ready(function(){
         },100)        
     })
 
+    setTimeout(function(){ open_page() },100)
+
 });
 
 document.addEventListener("DOMContentLoaded", function(event) {
