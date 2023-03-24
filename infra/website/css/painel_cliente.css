@@ -192,12 +192,6 @@ a{
 
 /* Produtos */
 
-body{
-
-    background: #eee;
-}
-
-
 .wrapper{
 
     margin-top: 30px;
@@ -320,9 +314,3 @@ body{
      margin-top: 10px;
 }
 
-.card:hover{
-
-    transform: scale(1.04);
-    z-index: 2;
-    overflow: hidden;
-}
