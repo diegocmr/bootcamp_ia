@@ -32,7 +32,7 @@ class Login:
         return self.token
     def efetuarLoginToken(self,token): 
         global userSession
-        
+      
         if not token:            
             raise Exception("O token informado está inválido")
         cnx = Connection()
@@ -43,10 +43,10 @@ class Login:
             WHERE
                 External_Token.token = %s
         """
-
-        cnx.execute(sql,[token])
-        user = cnx.fetchone()
        
+        cnx.execute(sql,[token])       
+        user = cnx.fetchone()
+        
         if (user):
             self.userSession = user['id_cliente']
             return self

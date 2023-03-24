@@ -23,13 +23,15 @@ class Connection:
         except Error as e:
             CatchError(e)
     def fetchone (self):          
-        return CursorByName(self.mycursor).__next__()
+        return CursorByName(self.mycursor).one()
     def fetch (self):
         return CursorByName(self.mycursor)
     def fetchall (self):
         return self.mycursor.fetchall()
     def rowcount (self):
         return self.mycursor.rowcount
+    def lastrowid (self):
+        return self.mycursor.lastrowid
     def commit (self):
         try:
             return self.cnx.commit()

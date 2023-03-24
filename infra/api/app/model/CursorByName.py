@@ -14,3 +14,10 @@ class CursorByName():
             raise StopIteration            
        
         return { description[0]: self.row[col] for col, description in enumerate(self._cursor.description) }
+    def one(self):       
+        self.row = self._cursor.fetchone()
+     
+        if self.row == None:
+            return False           
+       
+        return { description[0]: self.row[col] for col, description in enumerate(self._cursor.description) }

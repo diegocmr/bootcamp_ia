@@ -2,6 +2,7 @@ from flask import Flask,request,jsonify,make_response
 from flask_cors import CORS
 from model.Login import Login
 from model.Cliente import Cliente
+from model.Credito import Credito
 from flask.json import JSONEncoder
 from datetime import date
 
@@ -75,6 +76,22 @@ def cadastro_cliente():
     res.set_cookie("api_session", value=login.getToken(),samesite="None",domain="127.0.0.1",secure="False")  
     return res    
 
+@app.route('/cadastro_credito', methods=['POST'])
+def cadastro_credito():
+    
+    login = Login().efetuarLoginToken(request.cookies.get('api_session'))
+    credito = Credito(login)
+    json = request.get_json() 
+    res = make_response(jsonify({"status":credito.cadastroSolicitacao(json)}), 200)   
+    return res    
+@app.route('/get_credito_analise', methods=['POST'])
+def get_credito_analise():
+    
+    login = Login().efetuarLoginToken(request.cookies.get('api_session'))
+    credito = Credito(login)    
+    res = make_response(jsonify({"credito":credito.getSolicitacaoAnalise()}), 200)   
+    return res    
+    
 
 if __name__ == '__main__':
     app.run(port=8080,debug=True,host='0.0.0.0')
