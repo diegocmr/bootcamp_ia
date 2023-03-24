@@ -23,7 +23,10 @@
     outline-color: #008374 !important;
 }
 
-
+.container-solicitar_emprestimo_resumo{
+    width:500px;
+    display: none;
+}
 .container-solicitar_emprestimo{
     width:500px;
 }
