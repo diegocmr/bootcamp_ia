@@ -4,6 +4,7 @@ import json
 import numpy as np
 import warnings
 import sys, os
+import time
 from model.Connection import Connection
 warnings.filterwarnings("ignore") 
 
@@ -103,115 +104,81 @@ def model_loader(prazoMedioRecebimentoVendas,
     print ('valorAprovado',valorAprovado)
     return valorAprovado
 
-cnx = Connection()
-sql = """
+def rodarCron():   
+    cnx = Connection()
+    sql = """
 
-SELECT 
-    Emprestimo.id,
-    Cliente.prazoMedioRecebimentoVendas,
-    Cliente.titulosEmAberto,
-    Emprestimo.valorSolicitado,
-    Cliente.totalAtivo,
-    Cliente.faturamentoBruto,
-    Cliente.periodoDemonstrativoEmMeses,
-    (
-        CASE 
-            WHEN (Cliente.anoFundacao is null) THEN 'De 0 a 5 anos'
-            WHEN (Cliente.anoFundacao = 0) THEN 'De 0 a 5 anos'
-            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 0 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 6) THEN 'De 0 a 5 anos'
-            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 5 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 11) THEN 'De 6 a 10 anos'
-            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 10 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 17) THEN 'De 11 a 16 anos'
-            ELSE "Acima de 17 anos"
-        END
-    ) as intervaloFundacao,
-    Cliente.capitalSocial,
-    Cliente.empresa_MeEppMei,
-    YEAR(Cliente.primeira_compra) as primeiraCompra_Y,
-    MONTH(Cliente.primeira_compra) as primeiraCompra_m,
-    YEAR(Cliente.periodoBalanco) as periodoBalanco_Y,
-    MONTH(Cliente.periodoBalanco) as periodoBalanco_m,
-    (
-        SELECT count(*) FROM Emprestimo as Emprestimo_Count where Emprestimo_Count.id_cliente = Cliente.id AND NOT status = %s 
-    ) as qtd_solic
+    SELECT 
+        Emprestimo.id,
+        Cliente.prazoMedioRecebimentoVendas,
+        Cliente.titulosEmAberto,
+        Emprestimo.valorSolicitado,
+        Cliente.totalAtivo,
+        Cliente.faturamentoBruto,
+        Cliente.periodoDemonstrativoEmMeses,
+        (
+            CASE 
+                WHEN (Cliente.anoFundacao is null) THEN 'De 0 a 5 anos'
+                WHEN (Cliente.anoFundacao = 0) THEN 'De 0 a 5 anos'
+                WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 0 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 6) THEN 'De 0 a 5 anos'
+                WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 5 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 11) THEN 'De 6 a 10 anos'
+                WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 10 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 17) THEN 'De 11 a 16 anos'
+                ELSE "Acima de 17 anos"
+            END
+        ) as intervaloFundacao,
+        Cliente.capitalSocial,
+        Cliente.empresa_MeEppMei,
+        YEAR(Cliente.primeira_compra) as primeiraCompra_Y,
+        MONTH(Cliente.primeira_compra) as primeiraCompra_m,
+        YEAR(Cliente.periodoBalanco) as periodoBalanco_Y,
+        MONTH(Cliente.periodoBalanco) as periodoBalanco_m,
+        (
+            SELECT count(*) FROM Emprestimo as Emprestimo_Count where Emprestimo_Count.id_cliente = Cliente.id AND NOT status = %s 
+        ) as qtd_solic
 
-FROM Emprestimo
-INNER JOIN Cliente
-    ON Cliente.id = Emprestimo.id_cliente
-WHERE   
-    Emprestimo.status = %s
+    FROM Emprestimo
+    INNER JOIN Cliente
+        ON Cliente.id = Emprestimo.id_cliente
+    WHERE   
+        Emprestimo.status = %s
 
-"""
-cnx.execute(sql,['emAnalise','emAnalise'])
+    """
+    cnx.execute(sql,['emAnalise','emAnalise'])
 
-def tratarNone(data):
-    if data is None:
-        return 0
-    return data
+    def tratarNone(data):
+        if data is None:
+            return 0
+        return data
 
-cnx_credito = Connection()
-for credito in cnx.fetch():
-    valor_credito = model_loader(
-        float(tratarNone(credito["prazoMedioRecebimentoVendas"])),
-        float(tratarNone(credito["titulosEmAberto"])),
-        float(tratarNone(credito["valorSolicitado"])),
-        float(tratarNone(credito["totalAtivo"])),
-        float(tratarNone(credito["faturamentoBruto"])),
-        float(tratarNone(credito["periodoDemonstrativoEmMeses"])),
-        credito["intervaloFundacao"],
-        float(credito["capitalSocial"]),
-        bool(tratarNone(credito["empresa_MeEppMei"])),
-        float(tratarNone(credito["primeiraCompra_Y"])),
-        float(tratarNone(credito["primeiraCompra_m"])),
-        float(tratarNone(credito["periodoBalanco_Y"])),
-        float(tratarNone(credito["periodoBalanco_m"])),
-        float(tratarNone(credito["qtd_solic"]))
-    )
-    if valor_credito < 0:
-        valor_credito = 0
-    if valor_credito >= credito["valorSolicitado"]:
-        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["Aprovado",credito["valorSolicitado"],credito["id"]])
-        cnx_credito.commit()
-    if valor_credito < credito["valorSolicitado"]:
-        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["ConfirmacaoCliente",valor_credito,credito["id"]])
-        cnx_credito.commit()
-    print(valor_credito) 
-    print(credito)
+    cnx_credito = Connection()
+    for credito in cnx.fetch():
+        valor_credito = model_loader(
+            float(tratarNone(credito["prazoMedioRecebimentoVendas"])),
+            float(tratarNone(credito["titulosEmAberto"])),
+            float(tratarNone(credito["valorSolicitado"])),
+            float(tratarNone(credito["totalAtivo"])),
+            float(tratarNone(credito["faturamentoBruto"])),
+            float(tratarNone(credito["periodoDemonstrativoEmMeses"])),
+            credito["intervaloFundacao"],
+            float(credito["capitalSocial"]),
+            bool(tratarNone(credito["empresa_MeEppMei"])),
+            float(tratarNone(credito["primeiraCompra_Y"])),
+            float(tratarNone(credito["primeiraCompra_m"])),
+            float(tratarNone(credito["periodoBalanco_Y"])),
+            float(tratarNone(credito["periodoBalanco_m"])),
+            float(tratarNone(credito["qtd_solic"]))
+        )
+        valor_credito = float(format(valor_credito, '.2f'))
 
-"""
-
-model_loader(0,
-                0.0,
-                100000.0,
-                1876039.0,
-                1818311.0,
-                12.0,
-                'Acima de 17 anos',
-                90000.0,
-                True,
-                2015.0,
-                12.0,
-                2019.0,
-                12.0,
-                2.0)
-
-prazoMedioRecebimentoVendas,
-titulosEmAberto,
-valorSolicitado,
-totalAtivo,
-faturamentoBruto,
-periodoDemonstrativoEmMeses,
-intervaloFundacao,
-capitalSocial,
-empresa_MeEppMei,
-primeiraCompra_Y,
-primeiraCompra_m,
-periodoBalanco_Y,
-periodoBalanco_m,
-qtd_solic
-"""
-"""
-COLOCAR NO CADASTRO
-titulosEmAberto
-periodoDemonstrativoEmMeses
-anoFundacao
-"""
+        if valor_credito < 0:
+            valor_credito = 0
+        if valor_credito >= credito["valorSolicitado"]:
+            cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["Aprovado",credito["valorSolicitado"],credito["id"]])
+            cnx_credito.commit()
+        if valor_credito < credito["valorSolicitado"]:
+            cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["ConfirmacaoCliente",valor_credito,credito["id"]])
+            cnx_credito.commit()
+        print(valor_credito, file=sys.stderr) 
+        print(credito, file=sys.stderr)
+    cnx.close()
+    cnx_credito.close()

@@ -37,3 +37,6 @@ class Connection:
             return self.cnx.commit()
         except Error as e:
             CatchError(e)    
+    def close(self):
+        self.cnx.close()
+        

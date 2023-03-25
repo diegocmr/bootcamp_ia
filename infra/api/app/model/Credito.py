@@ -10,6 +10,7 @@ class Credito:
 
         sql = """
             SELECT 
+                Emprestimo.id,
                 dataAprovadoEmComite, 
                 dataAprovadoNivelAnalista,
                 status,
@@ -26,6 +27,39 @@ class Credito:
 
         cnx.execute(sql,[self.login.userSession,"emAnalise","ConfirmacaoCliente","AnalistaManual","Aprovado"])   
         return cnx.fetchone()
+    def cancelarSolicitacao(self,dados):
+        cnx = Connection()      
+        sql = """        
+            DELETE FROM Emprestimo_Mensagem WHERE id_emprestimo = %s
+        """
+        cnx.execute(sql,[
+            dados["id_emprestimo"],           
+        ])
+        sql = """        
+            DELETE FROM Emprestimo WHERE id = %s
+        """
+        cnx.execute(sql,[
+            dados["id_emprestimo"],           
+        ])
+        cnx.commit()
+        return cnx.rowcount()
+    def alterarStatus (self,dados):
+        
+        if dados['status'] in ['Aprovado','AnalistaManual']:
+            status = dados['status']
+        else:
+            raise Exception("Status Inválido")
+        cnx = Connection()   
+        sql = """        
+            UPDATE Emprestimo set status = %s WHERE id = %s
+        """
+        cnx.execute(sql,[
+            status,
+            dados["id_emprestimo"]          
+        ])
+        cnx.commit()
+        return cnx.rowcount()
+
     def cadastroSolicitacao(self,dados):
      
         valorSolicitado = int(dados["valorSolicitado"])

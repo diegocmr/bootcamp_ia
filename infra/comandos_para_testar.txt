@@ -6,3 +6,9 @@ docker build -t xxbielxd/api_server:1.1 .
 
 Esse comando vai rodar o docker compose
 docker-compose up -d
+
+
+RODAR O SISTEMA
+
+docker rm $(docker container ps -aq) --force
+docker-compose up -d 

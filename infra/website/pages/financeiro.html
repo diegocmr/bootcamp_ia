@@ -62,6 +62,7 @@
                             <p><b>Solicitar Crédito</b></p>
                         </div>
                         <!-- Name input -->
+                        <input type="hidden" id="id_solitacao_credito">
                         <div class="mb-3 row valor_resumo_container">
                             <label for="valor_credito_resumo" class="col-sm-4 col-form-label">Valor:</label>
                             <div class="col-sm-8">
@@ -83,7 +84,8 @@
                         <div class="mb-3 row">
                             <label for="mensagem_credito_resumo" class="col-sm-2 col-form-label">Mensagem:</label>
                             <textarea class="form-control border" id="mensagem_credito_resumo" rows="4" disabled readonly></textarea>
-                        </div>                        
+                        </div>          
+                        <p class="texto_aviso_credito text-center" style="display: none;"></p>              
                         <div class="container_botao_credito_aceitar text-center w-100">
                             <button type="submit" class="aceitar_credito btn btn-success btn-inline mb-4">Aceitar</button> 
                             <button type="submit" class="enviar_analista_credito btn btn-warning btn-inline mb-4">Enviar p/ analista</button> 

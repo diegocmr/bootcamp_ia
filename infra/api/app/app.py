@@ -5,6 +5,7 @@ from model.Cliente import Cliente
 from model.Credito import Credito
 from flask.json import JSONEncoder
 from datetime import date
+from model.cron.credito import rodarCron
 
 import sys
 
@@ -82,7 +83,10 @@ def cadastro_credito():
     login = Login().efetuarLoginToken(request.cookies.get('api_session'))
     credito = Credito(login)
     json = request.get_json() 
-    res = make_response(jsonify({"status":credito.cadastroSolicitacao(json)}), 200)   
+    status = credito.cadastroSolicitacao(json)
+    if status:
+        rodarCron()
+    res = make_response(jsonify({"status":status}), 200)   
     return res    
 @app.route('/get_credito_analise', methods=['POST'])
 def get_credito_analise():
@@ -91,6 +95,22 @@ def get_credito_analise():
     credito = Credito(login)    
     res = make_response(jsonify({"credito":credito.getSolicitacaoAnalise()}), 200)   
     return res    
+@app.route('/update_credito_status', methods=['POST'])
+def update_credito_status():
+    
+    login = Login().efetuarLoginToken(request.cookies.get('api_session'))
+    credito = Credito(login)   
+    json = request.get_json() 
+    res = make_response(jsonify({"status":credito.alterarStatus(json)}), 200)   
+    return res  
+@app.route('/cancelar_credito', methods=['POST'])
+def cancelar_credito():
+    
+    login = Login().efetuarLoginToken(request.cookies.get('api_session'))
+    credito = Credito(login)   
+    json = request.get_json() 
+    res = make_response(jsonify({"status":credito.cancelarSolicitacao(json)}), 200)   
+    return res        
     
 
 if __name__ == '__main__':

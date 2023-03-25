@@ -37,31 +37,75 @@ $(document).ready(function(){
         order:[[2, 'desc']]
            
     });
-   
+    $(".aceitar_credito").click(function(){
+        var id_emprestimo = $("#id_solitacao_credito").val()
+        var funcSucess = function () {
+            $("#tab-solicitar").click()
+        }
+        var funcError = function(data) {
+            setMessage("Ocorreu um erro, Tente novamente mais tarde",".container-error");  
+        };
+        post_api("update_credito_status", {status:"Aprovado",id_emprestimo}, funcSucess, funcError)
+    });
+    $(".enviar_analista_credito").click(function(){
+        var id_emprestimo = $("#id_solitacao_credito").val()
+        var funcSucess = function () {
+            $("#tab-solicitar").click();
+        }
+        var funcError = function(data) {
+            setMessage("Ocorreu um erro, Tente novamente mais tarde",".container-error");  
+        };
+        post_api("update_credito_status", {status:"AnalistaManual",id_emprestimo}, funcSucess, funcError)
+    });
+    $(".cancelar_credito").click(function(){
+        var id_emprestimo = $("#id_solitacao_credito").val()
+        var funcSucess = function () {
+            $("#tab-solicitar").click();
+        }
+        var funcError = function(data) {
+            setMessage("Ocorreu um erro, Tente novamente mais tarde",".container-error");  
+        };
+        post_api("cancelar_credito", {id_emprestimo}, funcSucess, funcError)
+    });
     $("#tab-solicitar").click(function(){
         dataTableEmprestimos.ajax.reload();
         var funcSucess = function(data) {
             var credito = data["credito"];
-            if(credito) {            
+            if(credito) {    
+                $(".texto_aviso_credito").hide();     
                 $(".container-solicitar_emprestimo_resumo").show();
                 $(".valor_resumo_container").show();
                 $(".container-solicitar_emprestimo").hide();            
                 $("#valor_credito_resumo").val("R$ " + credito["valorSolicitado"]);
                 $("#credito_status_resumo").val(credito["status"]);
+                $("#id_solitacao_credito").val(credito["id"]);
+                $(".container_botao_credito_aceitar").hide();
+                $(".valor_aprovado_resumo").hide();                
                 $("#mensagem_credito_resumo").html(credito["mensagem"]);
 
                 if(credito["status"] == "ConfirmacaoCliente" || credito["status"] == "Aprovado" || credito["status"] == "AnalistaManual"){
                     $(".valor_aprovado_resumo").show();
-                    $("#valor_credito_aprovado_resumo").val("R$ " + credito["valorAprovado"]);  
-                    if(credito["status"] != "Aprovado"){
+                    $("#valor_credito_aprovado_resumo").val("R$ " + tratarFloat(credito["valorAprovado"]).toFixed(2));  
+                    if(credito["status"] != "Aprovado" && credito["status"] != "AnalistaManual"){
                         $(".container_botao_credito_aceitar").show();
-                    }else{                      
-                        $(".valor_resumo_container").hide();
+                        if(tratarFloat(credito["valorAprovado"]) < 50){
+                            $(".aceitar_credito ").hide();
+                        }else{
+                            $(".aceitar_credito ").show();
+                        }
+                    }else{          
+                        if (credito["status"] == "Aprovado") {
+                            $(".valor_resumo_container").hide();
+                            $(".valor_aprovado_resumo").show();
+                        } else{
+                            $(".valor_resumo_container").show();
+                            $(".valor_aprovado_resumo").hide();
+                            $(".texto_aviso_credito").show();  
+                            $(".texto_aviso_credito").html("<b>Aguarde até que um dos nossos analistas aprove sua solicitação<b>");  
+                        }        
+                        
                         $(".container_botao_credito_aceitar").hide();
-                    }                    
-
-                }else{
-                    $(".valor_aprovado_resumo").hide();
+                    }  
                 }
 
                 return true;
@@ -71,7 +115,7 @@ $(document).ready(function(){
             }
         };
         var funcError = function(data) {
-            
+            setMessage("Ocorreu um erro, Tente novamente mais tarde",".container-error");  
         };
     
         post_api("get_credito_analise", {}, funcSucess, funcError)
@@ -92,11 +136,7 @@ $(document).ready(function(){
         }        
 
         var funcSucess = function(data) {
-            $(".container-solicitar_emprestimo_resumo").show();
-            $(".container-solicitar_emprestimo").hide();            
-            $("#valor_credito_resumo").val("R$ "+valorSolicitado);
-            $("#credito_status_resumo").val("emAnalise");
-            $("#mensagem_credito_resumo").html(mensagem);
+            $("#tab-solicitar").click();
             setMessage("Enviamos com sucesso sua solicitação!",".container-error",5000,"bg-success");  
             dataTableEmprestimos.ajax.reload();
         };
