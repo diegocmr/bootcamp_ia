@@ -30,10 +30,18 @@ class Cliente:
             totalPatrimonioLiquido,
             faturamentoBruto,
             senha,
-            empresa_MeEppMei
+            empresa_MeEppMei,
+            titulosEmAberto,
+            periodoDemonstrativoEmMeses,
+            anoFundacao,
+            periodoBalanco
         )
         VALUES
         (
+            %s,
+            %s,
+            %s,
+            %s,
             %s,
             %s,
             %s,
@@ -54,7 +62,12 @@ class Cliente:
             dados["totalPatrimonioLiquido"],
             dados["fataturamentoBruto"],
             dados["senha"],
-            dados["empresa_MeEppMei"]
+            dados["empresa_MeEppMei"],
+            dados["titulosEmAberto"],
+            dados["periodoDemonstrativoEmMeses"],
+            dados["anoFundacao"],
+            dados["periodoBalanco"]
+            
         ])
         cnx.commit()
         return bool(cnx.rowcount())

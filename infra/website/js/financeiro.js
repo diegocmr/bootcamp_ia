@@ -44,10 +44,26 @@ $(document).ready(function(){
             var credito = data["credito"];
             if(credito) {            
                 $(".container-solicitar_emprestimo_resumo").show();
+                $(".valor_resumo_container").show();
                 $(".container-solicitar_emprestimo").hide();            
                 $("#valor_credito_resumo").val("R$ " + credito["valorSolicitado"]);
                 $("#credito_status_resumo").val(credito["status"]);
                 $("#mensagem_credito_resumo").html(credito["mensagem"]);
+
+                if(credito["status"] == "ConfirmacaoCliente" || credito["status"] == "Aprovado" || credito["status"] == "AnalistaManual"){
+                    $(".valor_aprovado_resumo").show();
+                    $("#valor_credito_aprovado_resumo").val("R$ " + credito["valorAprovado"]);  
+                    if(credito["status"] != "Aprovado"){
+                        $(".container_botao_credito_aceitar").show();
+                    }else{                      
+                        $(".valor_resumo_container").hide();
+                        $(".container_botao_credito_aceitar").hide();
+                    }                    
+
+                }else{
+                    $(".valor_aprovado_resumo").hide();
+                }
+
                 return true;
             }else{
                 $(".container-solicitar_emprestimo_resumo").hide();

@@ -166,8 +166,10 @@ for credito in cnx.fetch():
         float(tratarNone(credito["periodoBalanco_m"])),
         float(tratarNone(credito["qtd_solic"]))
     )
+    if valor_credito < 0:
+        valor_credito = 0
     if valor_credito >= credito["valorSolicitado"]:
-        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["AprovadoAnalistaDevedor",credito["valorSolicitado"],credito["id"]])
+        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["Aprovado",credito["valorSolicitado"],credito["id"]])
         cnx_credito.commit()
     if valor_credito < credito["valorSolicitado"]:
         cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["ConfirmacaoCliente",valor_credito,credito["id"]])

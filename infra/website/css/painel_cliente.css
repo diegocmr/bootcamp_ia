@@ -5,17 +5,15 @@
 :root {
    
 }
-.btn:hover {
+.btn:hover:not(.btn-warning):not(.btn-danger) {
     background: rgba(0, 131, 116, 0.8) !important;
 }
-.btn {
+.btn:not(.btn-warning):not(.btn-danger) {
     background: var(--first-color) !important;
     border: 0;
-    border-color: #008374;
-    padding: 14px 45px;
+    border-color: #008374;    
     color: #fff;
-    transition: 0.4s;
-    border-radius: 50px;
+    transition: 0.4s;    
 }
 
 .btn.button-search{

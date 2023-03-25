@@ -37,6 +37,11 @@ $(document).ready(function(){
         var totalAtivo = tratarFloat($("#totalAtivo").val());
         var totalPatrimonioLiquido = tratarFloat($("#totalPatrimonioLiquido").val());
         var fataturamentoBruto = tratarFloat($("#fataturamentoBruto").val());
+        var titulosEmAberto = tratarFloat($("#titulosEmAberto").val());
+        var periodoDemonstrativoEmMeses = tratarFloat($("#periodoDemonstrativoEmMeses").val());
+        var anoFundacao = tratarFloat($("#anoFundacao").val());
+        var periodoBalanco = $("#periodoBalanco").val();        
+
         var senha = $("#senha").val();
         var senha_repetir = $("#senha_repetir").val();
         var empresa_MeEppMei = +$("#empresa_MeEppMei").is(":checked");
@@ -103,6 +108,10 @@ $(document).ready(function(){
             fataturamentoBruto,
             senha,
             empresa_MeEppMei,
+            titulosEmAberto,
+            periodoDemonstrativoEmMeses,
+            anoFundacao,
+            periodoBalanco
         }
 
         var funcSucess = function(data){            

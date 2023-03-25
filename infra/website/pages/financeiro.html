@@ -62,29 +62,33 @@
                             <p><b>Solicitar Crédito</b></p>
                         </div>
                         <!-- Name input -->
-                        <div class="mb-3 row">
-                            <label for="valor_credito_resumo" class="col-sm-2 col-form-label">Valor</label>
-                            <div class="col-sm-10">
+                        <div class="mb-3 row valor_resumo_container">
+                            <label for="valor_credito_resumo" class="col-sm-4 col-form-label">Valor:</label>
+                            <div class="col-sm-8">
                                 <input type="text" readonly class="form-control-plaintext" id="valor_credito_resumo" value="">
                             </div>
-                        </div>                       
+                        </div>          
+                        <div class="mb-3 row valor_aprovado_resumo" style="display: none;">
+                            <label for="valor_credito_aprovado_resumo" class="col-sm-4 col-form-label">Valor Aprovado:</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control-plaintext" id="valor_credito_aprovado_resumo" value="">
+                            </div>
+                        </div>              
                         <div class="mb-3 row">
-                            <label for="credito_status_resumo" class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-10">
+                            <label for="credito_status_resumo" class="col-sm-4 col-form-label">Status:</label>
+                            <div class="col-sm-8">
                                 <input type="text" readonly class="form-control-plaintext" id="credito_status_resumo" value="">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="mensagem_credito_resumo" class="col-sm-2 col-form-label">Mensagem</label>
+                            <label for="mensagem_credito_resumo" class="col-sm-2 col-form-label">Mensagem:</label>
                             <textarea class="form-control border" id="mensagem_credito_resumo" rows="4" disabled readonly></textarea>
                         </div>                        
-
-                        <!-- Checkbox -->
-                        <div class="form-check d-flex justify-content-center mb-4">
-                           <p></p>
+                        <div class="container_botao_credito_aceitar text-center w-100">
+                            <button type="submit" class="aceitar_credito btn btn-success btn-inline mb-4">Aceitar</button> 
+                            <button type="submit" class="enviar_analista_credito btn btn-warning btn-inline mb-4">Enviar p/ analista</button> 
+                            <button type="submit" class="cancelar_credito btn btn-danger btn-inline mb-4">Cancelar</button>
                         </div>
-                                      
-
                         <div class="container-error mt-4 mb-4" style="display: none;">
                             <div class="message-error"></div>
                         </div>

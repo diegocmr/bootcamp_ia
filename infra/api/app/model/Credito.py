@@ -21,10 +21,10 @@ class Credito:
                 ON Emprestimo_Mensagem.id_emprestimo = Emprestimo.id
             WHERE 
                 id_cliente = %s 
-                AND status = %s
+                AND status in(%s,%s,%s,%s)
         """
 
-        cnx.execute(sql,[self.login.userSession,"emAnalise"])   
+        cnx.execute(sql,[self.login.userSession,"emAnalise","ConfirmacaoCliente","AnalistaManual","Aprovado"])   
         return cnx.fetchone()
     def cadastroSolicitacao(self,dados):
      
