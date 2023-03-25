@@ -34,11 +34,12 @@ $(document).ready(function(){
                 return '<span class="badge badge-success rounded-pill d-inline">'+data+'</span>';
             }}
         ],
-        order:[[3, 'desc']]
+        order:[[2, 'desc']]
            
     });
    
     $("#tab-solicitar").click(function(){
+        dataTableEmprestimos.ajax.reload();
         var funcSucess = function(data) {
             var credito = data["credito"];
             if(credito) {            

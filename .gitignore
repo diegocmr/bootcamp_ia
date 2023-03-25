@@ -3,4 +3,5 @@
 infra/banco_dados/modelo_dados.mwb.bak
 .vscode/launch.json
 infra/api/app/model/__pycache__/
+infra/api/app/model/cron/__pycache__/
 .ipynb_checkpoints/

@@ -26,7 +26,8 @@ dataFrame = pd.read_csv("/data/dadosclientes.csv")
 dataFrame = dataFrame.astype(object).replace(np.nan, None)
 
 sql_cliente = """
-    INSERT INTO Cliente (            
+    INSERT INTO Cliente (   
+        prazoMedioRecebimentoVendas,         
         cnpj,
         razaoSocial,
         nomeFantasia,
@@ -35,10 +36,19 @@ sql_cliente = """
         primeira_compra,
         totalAtivo,
         totalPatrimonioLiquido,
-        faturamentoBruto
-    ) VALUES (            
+        faturamentoBruto,
+        anoFundacao,
+        periodoBalanco,
+        titulosEmAberto,
+        periodoDemonstrativoEmMeses
+    ) VALUES (   
+        %s,       
         %s,
         %s, 
+        %s,
+        %s,
+        %s,
+        %s,
         %s,
         %s,
         %s,
@@ -80,6 +90,7 @@ for index, row in dataFrame.iterrows():
         mycursor = cnx.cursor(prepared=True)
                     
         mycursor.execute(sql_cliente, (
+            row.prazoMedioRecebimentoVendas,
             row.cnpjSemTraco,
             row.razaoSocial,
             row.nomeFantasia,
@@ -88,7 +99,11 @@ for index, row in dataFrame.iterrows():
             row.primeiraCompra,
             row.totalAtivo,
             row.totalPatrimonioLiquido,
-            row.faturamentoBruto
+            row.faturamentoBruto,
+            row.anoFundacao,
+            row.periodoBalanco,
+            row.titulosEmAberto,
+            row.periodoDemonstrativoEmMeses
         ))
         id_cliente = mycursor.lastrowid
         mycursor.close()

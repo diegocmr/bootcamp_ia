@@ -3,6 +3,8 @@ import pickle
 import json
 import numpy as np
 import warnings
+import sys, os
+from model.Connection import Connection
 warnings.filterwarnings("ignore") 
 
 def model_loader(prazoMedioRecebimentoVendas,
@@ -54,13 +56,13 @@ def model_loader(prazoMedioRecebimentoVendas,
                         'valorAprovado', 'primeiraCompra_Y', 'primeiraCompra_m',
                         'periodoBalanco_Y', 'periodoBalanco_m', 'qtd_solic']
 
-    with open ('Models/label_encoder_10col.json', 'r') as jsonfile:
+    with open ('/Models/label_encoder_10col.json', 'r') as jsonfile:
         dict_label_encode_10col = json.load(jsonfile)
     
-    with open ('Models/label_encoder_16col.json', 'r') as jsonfile:
+    with open ('/Models/label_encoder_16col.json', 'r') as jsonfile:
         dict_label_encode_16col = json.load(jsonfile)
 
-    with open ('Models/gm_clusterizer.pkl', 'rb') as picklefile:
+    with open ('/Models/gm_clusterizer.pkl', 'rb') as picklefile:
         gm_clusterizer = pickle.load(picklefile)
         ### obtendo cluster
         
@@ -83,13 +85,13 @@ def model_loader(prazoMedioRecebimentoVendas,
        'valorAprovado', 'primeiraCompra_Y', 'primeiraCompra_m',
        'periodoBalanco_Y', 'periodoBalanco_m', 'qtd_solic']] #retornando ordem das colunas
     
-    with open('Models/standard_scaler_15cols_cluster{}.pkl'.format(cluster), 'rb') as picklefile:
+    with open('/Models/standard_scaler_15cols_cluster{}.pkl'.format(cluster), 'rb') as picklefile:
         sc = pickle.load(picklefile)
         df = sc.transform(df)
         df = pd.DataFrame(df)
         df.columns = todasColunas
     ### aplicando modelo
-    with open('Models/rf_cluster{}.pkl'.format(cluster), 'rb') as picklefile:
+    with open('/Models/rf_cluster{}.pkl'.format(cluster), 'rb') as picklefile:
         rf = pickle.load(picklefile)
     df.drop(columns = ['valorAprovado'], inplace=True)
     predict = rf.predict(df)[0]
@@ -101,11 +103,81 @@ def model_loader(prazoMedioRecebimentoVendas,
     print ('valorAprovado',valorAprovado)
     return valorAprovado
 
+cnx = Connection()
+sql = """
 
+SELECT 
+    Emprestimo.id,
+    Cliente.prazoMedioRecebimentoVendas,
+    Cliente.titulosEmAberto,
+    Emprestimo.valorSolicitado,
+    Cliente.totalAtivo,
+    Cliente.faturamentoBruto,
+    Cliente.periodoDemonstrativoEmMeses,
+    (
+        CASE 
+            WHEN (Cliente.anoFundacao is null) THEN 'De 0 a 5 anos'
+            WHEN (Cliente.anoFundacao = 0) THEN 'De 0 a 5 anos'
+            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 0 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 6) THEN 'De 0 a 5 anos'
+            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 5 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 11) THEN 'De 6 a 10 anos'
+            WHEN ((YEAR(CURDATE()) - Cliente.anoFundacao) > 10 and (YEAR(CURDATE()) - Cliente.anoFundacao) < 17) THEN 'De 11 a 16 anos'
+            ELSE "Acima de 17 anos"
+        END
+    ) as intervaloFundacao,
+    Cliente.capitalSocial,
+    Cliente.empresa_MeEppMei,
+    YEAR(Cliente.primeira_compra) as primeiraCompra_Y,
+    MONTH(Cliente.primeira_compra) as primeiraCompra_m,
+    YEAR(Cliente.periodoBalanco) as periodoBalanco_Y,
+    MONTH(Cliente.periodoBalanco) as periodoBalanco_m,
+    (
+        SELECT count(*) FROM Emprestimo as Emprestimo_Count where Emprestimo_Count.id_cliente = Cliente.id AND NOT status = %s 
+    ) as qtd_solic
 
+FROM Emprestimo
+INNER JOIN Cliente
+    ON Cliente.id = Emprestimo.id_cliente
+WHERE   
+    Emprestimo.status = %s
 
-if __name__ == '__main__':
-    model_loader(0,
+"""
+cnx.execute(sql,['emAnalise','emAnalise'])
+
+def tratarNone(data):
+    if data is None:
+        return 0
+    return data
+
+cnx_credito = Connection()
+for credito in cnx.fetch():
+    valor_credito = model_loader(
+        float(tratarNone(credito["prazoMedioRecebimentoVendas"])),
+        float(tratarNone(credito["titulosEmAberto"])),
+        float(tratarNone(credito["valorSolicitado"])),
+        float(tratarNone(credito["totalAtivo"])),
+        float(tratarNone(credito["faturamentoBruto"])),
+        float(tratarNone(credito["periodoDemonstrativoEmMeses"])),
+        credito["intervaloFundacao"],
+        float(credito["capitalSocial"]),
+        bool(tratarNone(credito["empresa_MeEppMei"])),
+        float(tratarNone(credito["primeiraCompra_Y"])),
+        float(tratarNone(credito["primeiraCompra_m"])),
+        float(tratarNone(credito["periodoBalanco_Y"])),
+        float(tratarNone(credito["periodoBalanco_m"])),
+        float(tratarNone(credito["qtd_solic"]))
+    )
+    if valor_credito >= credito["valorSolicitado"]:
+        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["AprovadoAnalistaDevedor",credito["valorSolicitado"],credito["id"]])
+        cnx_credito.commit()
+    if valor_credito < credito["valorSolicitado"]:
+        cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["ConfirmacaoCliente",valor_credito,credito["id"]])
+        cnx_credito.commit()
+    print(valor_credito) 
+    print(credito)
+
+"""
+
+model_loader(0,
                 0.0,
                 100000.0,
                 1876039.0,
@@ -119,3 +191,25 @@ if __name__ == '__main__':
                 2019.0,
                 12.0,
                 2.0)
+
+prazoMedioRecebimentoVendas,
+titulosEmAberto,
+valorSolicitado,
+totalAtivo,
+faturamentoBruto,
+periodoDemonstrativoEmMeses,
+intervaloFundacao,
+capitalSocial,
+empresa_MeEppMei,
+primeiraCompra_Y,
+primeiraCompra_m,
+periodoBalanco_Y,
+periodoBalanco_m,
+qtd_solic
+"""
+"""
+COLOCAR NO CADASTRO
+titulosEmAberto
+periodoDemonstrativoEmMeses
+anoFundacao
+"""
