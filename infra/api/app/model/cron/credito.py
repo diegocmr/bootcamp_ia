@@ -152,6 +152,7 @@ def rodarCron():
 
     cnx_credito = Connection()
     for credito in cnx.fetch():
+        print(credito, file=sys.stderr)
         valor_credito = model_loader(
             float(tratarNone(credito["prazoMedioRecebimentoVendas"])),
             float(tratarNone(credito["titulosEmAberto"])),
@@ -160,7 +161,7 @@ def rodarCron():
             float(tratarNone(credito["faturamentoBruto"])),
             float(tratarNone(credito["periodoDemonstrativoEmMeses"])),
             credito["intervaloFundacao"],
-            float(credito["capitalSocial"]),
+            float(tratarNone(credito["capitalSocial"])),
             bool(tratarNone(credito["empresa_MeEppMei"])),
             float(tratarNone(credito["primeiraCompra_Y"])),
             float(tratarNone(credito["primeiraCompra_m"])),
@@ -169,7 +170,7 @@ def rodarCron():
             float(tratarNone(credito["qtd_solic"]))
         )
         valor_credito = float(format(valor_credito, '.2f'))
-
+        print(valor_credito, file=sys.stderr) 
         if valor_credito < 0:
             valor_credito = 0
         if valor_credito >= credito["valorSolicitado"]:
@@ -178,7 +179,9 @@ def rodarCron():
         if valor_credito < credito["valorSolicitado"]:
             cnx_credito.execute("UPDATE Emprestimo set status = %s, valorAprovado = %s, dataAprovadoNivelAnalista = CURDATE() WHERE id = %s",["ConfirmacaoCliente",valor_credito,credito["id"]])
             cnx_credito.commit()
-        print(valor_credito, file=sys.stderr) 
-        print(credito, file=sys.stderr)
+       
+        
     cnx.close()
     cnx_credito.close()
+
+#rodarCron()
